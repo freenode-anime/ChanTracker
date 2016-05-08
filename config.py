@@ -60,14 +60,14 @@ conf.registerGlobalValue(ChanTracker, 'unquietCommand',
 conf.registerGlobalValue(ChanTracker, 'announceNagInterval',
     registry.Integer(-1,"""interval between two check about announceNagMode, this setting is global."""))
 
-conf.registerGlobalValue(ChanTracker, 'resolveIp',   
+conf.registerGlobalValue(ChanTracker, 'resolveIp',
     registry.Boolean(True, """trying to resolve host's ip with socket, could add latency"""))
 #now per channel
 
-conf.registerChannelValue(ChanTracker, 'avoidOverlap',   
+conf.registerChannelValue(ChanTracker, 'avoidOverlap',
     registry.Boolean(False, """avoid overlap between items, bot will try to use existing items against users, some limitations with extended bans"""))
 
-conf.registerChannelValue(ChanTracker, 'useIpForGateway',   
+conf.registerChannelValue(ChanTracker, 'useIpForGateway',
     registry.Boolean(False, """use *!*@*ip bans instead of *!ident@gateway/* when gateways cloak is found and ends with ip.*"""))
 
 conf.registerChannelValue(ChanTracker, 'opCommand',
@@ -75,7 +75,7 @@ conf.registerChannelValue(ChanTracker, 'opCommand',
 
 conf.registerChannelValue(ChanTracker, 'modesToAsk',
     registry.CommaSeparatedListOfStrings(['b','q'], """list of channel modes to sync into the bot's tracking database when it joins the channel"""))
-    
+
 conf.registerChannelValue(ChanTracker, 'modesToAskWhenOpped',
     registry.CommaSeparatedListOfStrings(['e','I'], """list of channel modes to sync into the bot's tracking database when it is opped"""))
 
@@ -86,7 +86,7 @@ conf.registerChannelValue(ChanTracker, 'autoExpire',
     registry.Integer(-1, """default expiration time for newly placed bans; -1 disables auto-expiration, otherwise it's in seconds"""))
 
 # related to logChannel
-    
+
 conf.registerChannelValue(ChanTracker, 'logChannel',
     registry.String("", """where bot announces op's actions; it is highly recommended to set an appropriate operator's channel to receive the various useful messages"""))
 
@@ -151,14 +151,17 @@ conf.registerChannelValue(ChanTracker, 'keepOp',
     registry.Boolean(False, """bot stays opped"""))
 
 conf.registerChannelValue(ChanTracker, 'kickMode',
-    registry.CommaSeparatedListOfStrings(['b'], """bot will kick affected users when mode is triggered, 
+    registry.CommaSeparatedListOfStrings(['b'], """bot will kick affected users when mode is triggered,
     use if with caution, if an op bans *!*@*, bot will kick everyone on the channel"""))
 
 conf.registerChannelValue(ChanTracker, 'kickMax',
 registry.Integer(-1,"""if > 0, disable kick if affected users > kickMax, avoid to cleanup entire channel with ban like *!*@*"""))
-    
+
 conf.registerChannelValue(ChanTracker, 'kickMessage',
     registry.CommaSeparatedListOfStrings(["You are banned from this channel"], """bot kick reasons"""))
+
+conf.registerChannelValue(ChanTracker, 'banForward',
+registry.String('',"""if your ircd supports that, you can forward the user to a specific channel"""))
 
 conf.registerChannelValue(ChanTracker, 'quietMessage',
     registry.String("", """leave empty if you don't want the bot to tell something to the user when he has been quieted ( by/via the bot ), in any case, if channel is under attack: bot will not send message"""))
@@ -171,13 +174,13 @@ conf.registerChannelValue(ChanTracker, 'trackAffected',
 
 conf.registerChannelValue(ChanTracker, 'doActionAgainstAffected',
     registry.Boolean(True, """devoice, deop, dehalfop user affected by a mode change"""))
-    
+
 conf.registerChannelValue(ChanTracker, 'useChannelBansForPermanentBan',
     registry.Boolean(True, """when users join the channel, check if user matchs a permanent ban set in Channel plugin"""))
 
 conf.registerChannelValue(ChanTracker, 'addKickMessageInComment',
     registry.Boolean(False, """add kick message to mode comment in tracking database"""))
-    
+
 conf.registerChannelValue(ChanTracker, 'askOpAboutMode',
     registry.Boolean(False,"""In a private message, ask the op who added a mode about the duration of the ban and a comment on why it was set"""))
 
@@ -248,7 +251,7 @@ registry.String('mass repeat detected',"""comment added on mode changes database
 conf.registerChannelValue(ChanTracker, 'massRepeatPatternLife',
 registry.PositiveInteger(300,"""duration of pattern life"""))
 conf.registerChannelValue(ChanTracker, 'massRepeatPatternLength',
-registry.Integer(-1,"""if -1, it uses the default system to compare strings, otherwise, it try to find the longest common message, and use it as a regexp pattern, 
+registry.Integer(-1,"""if -1, it uses the default system to compare strings, otherwise, it try to find the longest common message, and use it as a regexp pattern,
 if found string < length setted, it uses the default string compare"""))
 
 # YES IT'S ANNOYING
